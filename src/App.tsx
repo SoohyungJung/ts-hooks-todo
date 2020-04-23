@@ -20,7 +20,7 @@ const App: React.FC = () => {
 
   const handleTodoAdd = (text: string): void => {
     const newTodos: ITodo[] = [...todos, { text, complete: false }];
-    setTodos(newTodos);
+    text && setTodos(newTodos);
   }
 
   const handleComplete = (i: number): void => {
