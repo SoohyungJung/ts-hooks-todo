@@ -1,7 +1,6 @@
 const path = require('path');
 
 module.exports = {
-  target: 'web',
   mode: 'development',
   entry: './src/index.tsx',
   output: {
@@ -17,7 +16,7 @@ module.exports = {
       }
     ]
   },
-  resolve: { extensions: ['.ts', '.tsx', 'js'] },
+  resolve: { extensions: ['.ts', '.tsx', '.js'] },
   devServer: {
     contentBase: './',
     port: 5000
