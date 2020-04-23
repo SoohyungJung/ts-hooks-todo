@@ -29,6 +29,12 @@ const App: React.FC = () => {
     setTodos(newTodos);
   }
 
+  const handleDelete = (i: number): void => {
+    const newTodos = [...todos];
+    newTodos.splice(i, 1);
+    setTodos(newTodos);
+  }
+
   return (
     <S.Container>
       <h1>Todo List</h1>
@@ -48,6 +54,7 @@ const App: React.FC = () => {
             <button type="button" onClick={() => handleComplete(i)}>
               {item.complete ? "Incomplete" : "Complete"}
             </button>
+            <button type="button" onClick={() => handleDelete(i)}>&times;</button>
           </S.TodoList>
         ))}
       </S.ListWrapper>
@@ -70,20 +77,21 @@ S.ListWrapper = styled.section`
   margin-top: 50px;
 `;
 
-S.TodoList = styled.div<{ idx: number, isComplete: boolean }>`
+S.TodoList = styled.div<{ idx: number; isComplete: boolean }>`
   display: flex;
-  margin-top: ${props => (
-    props.idx === 0 ? '0' : '10px'
-  )};
+  margin-top: ${(props) => (props.idx === 0 ? "0" : "10px")};
 
   & > div {
-    text-decoration: ${props => (
-      props.isComplete ? 'line-through' : 'none'
-    )}
+    text-decoration: ${(props) => (props.isComplete ? "line-through" : "none")};
   }
 
   & > button {
-    margin-left: 5px;
+    &:nth-of-type(1) {
+      margin-left: 5px;
+    }
+    &:nth-of-type(2) {
+      margin-left: 20px;
+    }
   }
 `;
 
