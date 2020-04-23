@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 type FormElem = React.FormEvent<HTMLFormElement>
 
@@ -29,7 +30,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <div>
+    <S.Container>
       <h1>Todo List</h1>
       <form onSubmit={handleSubmit}>
         <input
@@ -40,16 +41,50 @@ const App: React.FC = () => {
         <button type="submit">Add Todo</button>
       </form>
 
-      <section>
+      <S.ListWrapper>
         {todos.map((item: ITodo, i: number) => (
-          <div key={i.toString()}>
+          <S.TodoList key={i.toString()} idx={i} isComplete={item.complete}>
             <div>{item.text}</div>
-            <button type="button" onClick={() => handleComplete(i)}>{item.complete ? 'Incomplete' : 'Complete'}</button>
-          </div>
+            <button type="button" onClick={() => handleComplete(i)}>
+              {item.complete ? "Incomplete" : "Complete"}
+            </button>
+          </S.TodoList>
         ))}
-      </section>
-    </div>
+      </S.ListWrapper>
+    </S.Container>
   );
 }
+
+const S: any = {};
+
+S.Container = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
+
+S.ListWrapper = styled.section`
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  margin-top: 50px;
+`;
+
+S.TodoList = styled.div<{ idx: number, isComplete: boolean }>`
+  display: flex;
+  margin-top: ${props => (
+    props.idx === 0 ? '0' : '10px'
+  )};
+
+  & > div {
+    text-decoration: ${props => (
+      props.isComplete ? 'line-through' : 'none'
+    )}
+  }
+
+  & > button {
+    margin-left: 5px;
+  }
+`;
 
 export default App;
