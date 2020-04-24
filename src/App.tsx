@@ -77,7 +77,7 @@ S.ListWrapper = styled.section`
   margin-top: 50px;
 `;
 
-S.TodoList = styled.div<{ idx: number; isComplete: boolean }>`
+S.TodoList = styled.div<{ idx: number, isComplete: boolean }>`
   display: flex;
   margin-top: ${(props) => (props.idx === 0 ? "0" : "10px")};
 
